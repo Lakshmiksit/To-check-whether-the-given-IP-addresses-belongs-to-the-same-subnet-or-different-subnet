@@ -1,0 +1,1 @@
+# To-check-whether-the-given-IP-addresses-belongs-to-the-same-subnet-or-different-subnet

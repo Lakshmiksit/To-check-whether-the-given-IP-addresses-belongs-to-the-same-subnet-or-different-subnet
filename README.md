@@ -1,39 +1,72 @@
 # To-check-whether-the-given-IP-addresses-belongs-to-the-same-subnet-or-different-subnet
+Used packages such as regex.matcher & regex.pattern
+Following with class subnet
+Following with main
 
-First starting with main,here exceptional handling is done using try and catch.
-we have used sameNetwork here which goes to sameNetwork method.
-Before that we have used private static String ip1,ip2,mask;
-Where private is an access specifier to make the member visible only inside the class and no other class can access it. static because one variable can be shared by all instances of the class.
-ip1,ip2,mask are the variables taken to accept the values.
-Now coming to sameNetwork method, inside this method we have byte[] a1 = InetAddress.getByName(ip1).getAddress();
-byte[] a1 is that we have a1 as a byte(A data type of 8-bit signed two's complement integer).
-InetAddress determines the IP address of a host from given host's name. So here this contains internet address as two fields : hostname(a string) and address(an int).
-Hostname contains the name of the host. ex: for an IP address, getByName gives www.abcd.com and getAddress gives the 32 bit IP address.
-Similarly we have done it for ip2 and mask.
-Here we have also done it for mask because the netmask taken is in form of ex: 255.255.255.0
-Next comes for loop
-i=0; i<a1.length; i++
-initially i=0 and here i (i.e.,0 for now) is < a1.length, it is satisified and goes to if condition.
-if ((a1[i] & m[i]) != (a2[i] & m[i]))
-It performs bit wise AND operation and a1.length checks bit by bit.
-1--->ip1,mask gets performed AND operation
+Checking for exception 
+If lenght is null or more 
+Prints messageFor command line arguments we used args[0],args[1] 
+Taking ip1,ip2 address as string values from user
 
-And
+Netmask is taken directly as a integer value
 
-2--)ip2,mask gets performed AND operation
+Now we are Validating the ip address 
+If the ip address is invalid  console will quit the program orelse it will continue.
 
-If 1 is not equal to 2 
-Then false
-else true.
+String mask we have taken as a empty string
 
-In main method we have boolean check=sameNetwork(args[0],args[1],args[2]);
-It will always go to if condition because it is always true if we use keyword "true" for if condition, so instead of that we are storing its return value as boolean check = sameNetwork();
-And now we can use this check in if condition
-if(check)
-print "SAME SUBNET"
+In the for loop 
+We have put I range of 0-32 
+If the users enters 18 as net mask then 
+First 18 bits will append 1 then the rest  14 bits gets append to 0.
+
+If(i<netmask)
+   Mask+=1
 else
-print "DIFFERENT SUBNET"
-As we are handling the exceptions we have catch here which prints "invalid input" when no input is given and will not allow the program to crash.
+Mask+=0
+
+Then we are performing AND operation for
+1.Between ip1 & mask 
+   The result of this is taken as result1
+2.Between ip2 & mask
+The result of this is taken as result2
+By using andMask method
+
+Then 
+If result1 is equal to result2 
+Print message same subnet
+Else
+Different subnet
+Next in the andmask function taking ip address & mask as the parameters which is splitted using dot operator
+Then a,b,c,d are taken as integer number and converted to binary using toBinaryString 
+We require 8bits with 7 spaces so replacing those 7 with 0
+Using string.format for all A B C D
+
+Using octect
+Converted to octet bits of binary string and added string at the end 
+This is string addition
+Now we have ip & mask in binary format
+Then performing AND operation
+1&1=1=result+=1
+1&0=0=result+=0
+
+Returning result
+
+Validate of String ip address
+It is a pattern which we borrowed from google 
+link--https://www.mkyong.com/regular-expressions/how-to-validate-ip-address-with-regular-expression/
+Maximum limit of a 8bit is 255 
+So providing this in a range we get pattern 
+Validate is used to check for valid ip address
+Matcher is a object for matcher of ipaddress
+
+If matcher & matches are same
+Return true 
+Else
+False
+
+sources<-- keen help from grop19
+https://www.mkyong.com/regular-expressions/how-to-validate-ip-address-with-regular-expression/
 Example:
 ip1:10.20.30.40  ip2:10.20.33.40  21
 output:Different subnet
@@ -42,5 +75,5 @@ ip1:10.20.30.40  ip2:10.20.33.40  18
 output:Same subnet
 
 If no inputs are given:
-output:One or more invalid IP Addresses specified.\n
-output:
+output:One  or more invalid IP Addresses specified.\nTry again
+
